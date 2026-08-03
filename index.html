@@ -65,6 +65,22 @@
   .lnk .ttl{font-weight:700;font-size:.95rem;margin:2px 0 2px}
   .lnk .sub{color:var(--muted);font-size:.82rem}
   .lnk .arw{float:right;color:var(--accent);font-weight:700}
+  /* annonces */
+  .ann{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:13px 15px;margin-bottom:11px;
+    box-shadow:0 1px 2px rgba(0,0,0,.04)}
+  .ann .top{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+  .ann .name{font-weight:700;font-size:1rem}
+  .ann .tag{font-size:.74rem;font-weight:700;padding:2px 8px;border-radius:6px;white-space:nowrap}
+  .t-ok{background:var(--green-bg);color:var(--green)}
+  .t-warn{background:var(--amber-bg);color:var(--amber)}
+  .t-no{background:var(--red-bg);color:var(--red)}
+  .ann .spec{color:var(--muted);font-size:.82rem;margin:4px 0 6px}
+  .ann .price{font-weight:700}
+  .ann .verd{font-size:.88rem;margin-bottom:8px}
+  .ann .verd b{color:var(--amber)}
+  .ann a.src{display:inline-block;font-size:.82rem;font-weight:700;color:var(--accent);text-decoration:none;
+    border:1px solid var(--line);border-radius:8px;padding:5px 10px}
+  .ann .ref{font-size:.78rem;color:var(--muted)}
   footer{text-align:center;color:var(--muted);font-size:.76rem;margin-top:20px;padding:0 14px}
 </style>
 </head>
@@ -81,6 +97,7 @@
   <a href="#moteurs">Moteurs</a>
   <a href="#redflags">Red flags</a>
   <a href="#controle">Contrôles sur place</a>
+  <a href="#annonces">Annonces vues</a>
   <a href="#liens">Liens à consulter</a>
 </nav>
 
@@ -271,6 +288,35 @@
   </ul></div>
 
   <div class="reflex">Le doute persiste ? <b>Contrôle pré-achat dans un garage tiers</b> (70 à 120 EUR, test compression + conso d'huile). Ça tranche définitivement la question fiabilité.</div>
+</section>
+
+<!-- ============ ANNONCES VUES ============ -->
+<section id="annonces">
+  <h2>6. Annonces vues</h2>
+  <div class="lead">Annonces évaluées, du plus au moins recommandé. Aucune n'est un break Clio/Mégane (cible initiale).</div>
+
+  <div class="ann">
+    <div class="top"><span class="name">Nissan Juke 1.5 dCi 110 Connect</span><span class="tag t-warn">Correct, sous-motorisé</span></div>
+    <div class="spec">2015 · 136 000 km · manuelle · <span class="price">8 490 EUR</span> · pro JPA Automobiles, Mont-de-Marsan (40)</div>
+    <div class="verd">Le plus sain : moteur K9K, aucun sinistre, garantie pro (+ légale 12 mois). Mais <b>110 ch (0-100 ~11,5s, sous tes critères)</b>, au-dessus du budget, petit coffre. Vérifier régulateur + Euro 6.</div>
+    <span class="ref">La Centrale · réf. W103518960</span>
+  </div>
+
+  <div class="ann">
+    <div class="top"><span class="name">Renault Grand Scénic 3 Ph.2 1.5 dCi 110</span><span class="tag t-warn">Vérifier Crit'Air</span></div>
+    <div class="spec">03/2013 · 147 613 km · manuelle · <span class="price">6 990 EUR</span> · pro Car Max 87, Limoges (87, ~260 km)</div>
+    <div class="verd">Moins chère, 7 places, moteur K9K. MAIS <b>annoncée Euro 4 / Crit'Air 3 : veto probable pour Genève, à confirmer sur carte grise (case V.9)</b>. 110 ch trop juste pour ce gabarit. Hors rayon 200 km.</div>
+    <a class="src" href="https://www.autoscout24.fr/offres/renault-grand-scenic-3-phase-2-1-5-dci-110-cv-diesel-gris-cat_ma60mo18711-dddf108b-2a62-4915-ad9f-b09583451d9c" target="_blank" rel="noopener">Voir l'annonce &rarr;</a>
+  </div>
+
+  <div class="ann">
+    <div class="top"><span class="name">Jeep Compass 2 2.2 CRD 163 Limited 4x4</span><span class="tag t-no">Prudence</span></div>
+    <div class="spec">2014 · 149 000 km · manuelle · <span class="price">8 000 EUR</span> · particulier, Dordogne (24700)</div>
+    <div class="verd">Bon moteur (Mercedes OM651). MAIS <b>"sinistre/expertise détecté" (Autoviza)</b>, annonce en ligne depuis 60 j + prix cassé = signal. Jeep 4x4 = pièces chères, entretien lourd : casse ta logique "réparable partout".</div>
+    <span class="ref">La Centrale · réf. B103972397</span>
+  </div>
+
+  <div class="reflex">Rappel cible : <b>Clio Estate / Mégane Estate 1.5 dCi</b>, 2013+, ≤ 8 000 EUR. Ces trois s'en écartent (SUV, monospace). Priorité aux breaks via les liens ci-dessous.</div>
 </section>
 
 <!-- ============ LIENS ============ -->
