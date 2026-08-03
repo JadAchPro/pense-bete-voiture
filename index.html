@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fiche achat voiture - critères, modèles, contrôles</title>
+<style>
+  :root{
+    --bg:#f4f5f7; --card:#ffffff; --ink:#1a1d24; --muted:#5b6472;
+    --line:#e2e5ea; --green:#1f8a4c; --green-bg:#e8f6ee;
+    --red:#c62f34; --red-bg:#fdecec; --amber:#a86a00; --amber-bg:#fdf4e3; --accent:#2b5cff;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-text-size-adjust:100%}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.5;max-width:680px;margin:0 auto;padding-bottom:60px}
+  header{padding:16px 14px 6px}
+  h1{font-size:1.3rem;line-height:1.25}
+  .hint{color:var(--muted);font-size:.82rem;margin-top:3px}
+  .nav{position:sticky;top:0;z-index:10;background:var(--bg);display:flex;gap:6px;padding:10px 14px;overflow-x:auto;
+    border-bottom:1px solid var(--line);-webkit-overflow-scrolling:touch}
+  .nav a{flex:0 0 auto;border:1px solid var(--line);background:#fff;color:var(--accent);border-radius:999px;
+    padding:7px 12px;font-size:.82rem;font-weight:600;white-space:nowrap;text-decoration:none}
+  section{padding:16px 14px 4px;scroll-margin-top:56px}
+  h2{font-size:1.12rem;margin-bottom:4px}
+  .lead{color:var(--muted);font-size:.86rem;margin-bottom:12px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:13px 15px;margin-bottom:11px;
+    box-shadow:0 1px 2px rgba(0,0,0,.04)}
+  ul{list-style:none}
+  li{padding:6px 0 6px 24px;position:relative;font-size:.92rem;border-bottom:1px solid var(--line)}
+  li:last-child{border-bottom:none}
+  li::before{content:"";position:absolute;left:2px;top:12px;width:9px;height:9px;border-radius:2px;background:var(--accent)}
+  li.ok::before{background:var(--green)}
+  li.crit::before{background:var(--accent)}
+  li b{font-weight:700}
+  li small{display:block;color:var(--muted);font-size:.82rem;padding-left:0}
+  /* modele */
+  .mod{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-bottom:11px}
+  .mod .top{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+  .mod .name{font-weight:700;font-size:1rem}
+  .mod .note{font-size:.8rem;font-weight:700;padding:2px 8px;border-radius:6px;white-space:nowrap}
+  .n-top{background:var(--green-bg);color:var(--green)}
+  .n-mid{background:#eef3ff;color:var(--accent)}
+  .n-low{background:var(--amber-bg);color:var(--amber)}
+  .mod .spec{color:var(--muted);font-size:.82rem;margin:3px 0 6px}
+  .mod .vig{font-size:.86rem}
+  .mod .vig b{color:var(--amber)}
+  .flag{background:var(--red-bg);border:1px solid #f3c6c6;border-radius:12px;padding:11px 13px;margin-bottom:10px}
+  .flag .h{font-weight:700;color:var(--red);font-size:.92rem;margin-bottom:2px}
+  .flag .d{font-size:.85rem;color:#7a2326}
+  .flag.good{background:var(--green-bg);border-color:#bfe6cd}
+  .flag.good .h{color:var(--green)} .flag.good .d{color:#1c5c37}
+  .flag.warn{background:var(--amber-bg);border-color:#f0d9a6}
+  .flag.warn .h{color:var(--amber)} .flag.warn .d{color:#7a5600}
+  .grp{font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin:14px 0 6px}
+  .reflex{background:#111827;color:#f4f5f7;border-radius:14px;padding:14px;font-size:.9rem;margin-top:6px}
+  .reflex b{color:#ffd479}
+  footer{text-align:center;color:var(--muted);font-size:.76rem;margin-top:20px;padding:0 14px}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Fiche achat voiture</h1>
+  <div class="hint">À consulter chez les concessionnaires. Budget ≤ 8 000 EUR, usage autoroute (~20-30 000 km/an).</div>
+</header>
+
+<nav class="nav">
+  <a href="#criteres">Critères</a>
+  <a href="#modeles">Modèles OK</a>
+  <a href="#moteurs">Moteurs</a>
+  <a href="#redflags">Red flags</a>
+  <a href="#controle">Contrôles sur place</a>
+</nav>
+
+<!-- ============ CRITERES ============ -->
+<section id="criteres">
+  <h2>1. Critères incompressibles</h2>
+  <div class="lead">Si un seul manque, on passe.</div>
+  <div class="card">
+    <ul>
+      <li class="crit"><b>Diesel si &gt; 22 000 km/an, sinon essence fiable OK</b><small>Règle du garagiste. Au litre le gazole n'est plus moins cher, mais il consomme ~15-20 % de moins : rentable seulement à gros kilométrage. En dessous, une essence fiable (Toyota, Mazda) est le choix malin. Dans les deux cas : voir la section Moteurs.</small></li>
+      <li class="crit"><b>120 à 150 ch</b><small>Nécessaire pour tenir le 0-100 km/h en moins de 11s.</small></li>
+      <li class="crit"><b>0-100 km/h &lt; 11s</b></li>
+      <li class="crit"><b>≤ 150 000 km</b></li>
+      <li class="crit"><b>5 places + climatisation</b></li>
+      <li class="crit"><b>Régulateur de vitesse</b><small>Quasi indispensable sur tes longs trajets.</small></li>
+      <li class="crit"><b>Euro 5 minimum (Crit'Air 2)</b><small>Idéal Euro 6 (2015+) pour traverser Genève sereinement. Penser au macaron Stick'AIR + vignette autoroute suisse.</small></li>
+      <li class="crit"><b>Historique d'entretien complet</b><small>Carnet + factures. Distribution faite, facture à l'appui.</small></li>
+      <li class="crit"><b>Contrôle technique vierge &lt; 6 mois</b></li>
+      <li class="crit"><b>Budget ≤ 8 000 EUR</b> tout compris (carte grise incluse)</li>
+      <li class="crit"><b>Boîte manuelle ou auto</b><small>Éviter les boîtes DSG 7 à sec (peu fiables).</small></li>
+    </ul>
+  </div>
+  <div class="reflex">À ce prix, <b>l'entretien du véhicule précis compte plus que la réputation du modèle</b>. Un bon modèle mal suivi est pire qu'un modèle moyen choyé.</div>
+</section>
+
+<!-- ============ MODELES ============ -->
+<section id="modeles">
+  <h2>2. Modèles qui cochent les critères</h2>
+  <div class="lead">Classés du plus fiable au plus risqué. Note = avis propriétaires (Caradisiac).</div>
+
+  <div class="mod">
+    <div class="top"><span class="name">Toyota Avensis Touring 2.0 D-4D 143</span><span class="note n-top">Top fiabilité</span></div>
+    <div class="spec">0-100 ~9,5s · break spacieux</div>
+    <div class="vig">Le choix tranquillité. <b>Vérifier</b> : rappel vanne EGR / collecteur effectué.</div>
+  </div>
+
+  <div class="mod">
+    <div class="top"><span class="name">Skoda Superb Combi 2.0 TDI 150</span><span class="note n-top">15 à 17/20</span></div>
+    <div class="spec">0-100 ~8,7s · espace quasi limousine</div>
+    <div class="vig"><b>Vérifier</b> : boîte manuelle (fuir DSG à sec), entretien à jour.</div>
+  </div>
+
+  <div class="mod">
+    <div class="top"><span class="name">Skoda Octavia Combi 2.0 TDI 150</span><span class="note n-top">15 à 17/20</span></div>
+    <div class="spec">0-100 ~8,6s · grand coffre, polyvalent</div>
+    <div class="vig"><b>Vérifier</b> : conso d'huile (générations anciennes), amortisseurs.</div>
+  </div>
+
+  <div class="mod">
+    <div class="top"><span class="name">Citroën Grand C4 Picasso 2.0 HDi 150</span><span class="note n-mid">15/20</span></div>
+    <div class="spec">0-100 ~9,5s · monospace 7 places, lumineux</div>
+    <div class="vig"><b>Vérifier</b> : état embrayage + volant moteur bimasse (poste coûteux).</div>
+  </div>
+
+  <div class="mod">
+    <div class="top"><span class="name">Peugeot 508 SW 2.0 HDi 150</span><span class="note n-mid">Moyenne</span></div>
+    <div class="spec">0-100 ~9s · break routier très confortable</div>
+    <div class="vig"><b>Vérifier</b> : FAP (colmatage/régénérations), roulements sur le 2.0 HDi 140.</div>
+  </div>
+
+  <div class="mod">
+    <div class="top"><span class="name">Peugeot 5008 / 3008 2.0 HDi 150</span><span class="note n-mid">Moyenne</span></div>
+    <div class="spec">0-100 ~9,5s · 5008 = 7 places, 3008 = surélevé</div>
+    <div class="vig"><b>Vérifier</b> : injecteurs (historique de remplacement), et sur 5008 privilégier <b>après 2013</b>.</div>
+  </div>
+
+  <div class="mod">
+    <div class="top"><span class="name">Citroën C5 Tourer 2.0 HDi 150</span><span class="note n-mid">Moyenne</span></div>
+    <div class="spec">0-100 ~9,5s · grand break confortable, souvent le moins cher</div>
+    <div class="vig"><b>Vérifier</b> : embrayage prématuré, à-coups sous 2 000 tr/min.</div>
+  </div>
+
+  <div class="mod">
+    <div class="top"><span class="name">Nissan Qashqai 1.6 dCi 130</span><span class="note n-low">6,2/10</span></div>
+    <div class="spec">0-100 ~10,5s · SUV surélevé</div>
+    <div class="vig"><b>Impératif</b> : boîte <b>manuelle uniquement</b>, JAMAIS la CVT X-Tronic. Surveiller turbo et batterie.</div>
+  </div>
+
+  <div class="mod">
+    <div class="top"><span class="name">Dacia Duster 1.5 dCi 110</span><span class="note n-low">Budget / espace</span></div>
+    <div class="spec">0-100 ~12s · SUV simple et robuste</div>
+    <div class="vig">Bien viser la version <b>dCi (diesel)</b>, PAS le 1.2 TCe essence. Surveiller l'embrayage à froid. Réparations peu chères.</div>
+  </div>
+
+  <div class="mod">
+    <div class="top"><span class="name">Dacia Lodgy 1.5 dCi 110</span><span class="note n-low">6/10</span></div>
+    <div class="spec">0-100 ~12s · 7 places, très spacieux, pas cher</div>
+    <div class="vig"><b>Vérifier</b> : embrayage (broutements au rétrogradage), électronique. Simple à réparer.</div>
+  </div>
+</section>
+
+<!-- ============ MOTEURS ============ -->
+<section id="moteurs">
+  <h2>3. Moteurs : la liste de tri</h2>
+  <div class="lead">Filtre par le moteur AVANT de t'intéresser à une annonce.</div>
+
+  <div class="grp" style="color:var(--red)">À fuir (dossier rouge, on ne discute pas)</div>
+  <div class="flag"><div class="h">Essence 1.2 PureTech turbo (PSA)</div><div class="d">Courroie de distribution "humide" qui se délite et détruit le moteur. 208, 2008, 308, C3, C4, DS.</div></div>
+  <div class="flag"><div class="h">Essence 1.2 TCe / 1.2 DIG-T (Renault-Nissan)</div><div class="d">Même bloc rebadgé. Surconsommation d'huile jusqu'à la casse. Clio, Captur, Mégane, Kadjar, Qashqai, Juke, Dacia.</div></div>
+  <div class="flag"><div class="h">Essence 1.4 / 1.6 THP / VTi (moteur "Prince" EP6, PSA-BMW)</div><div class="d">Toutes puissances (120 à 200 ch). Chaîne qui s'allonge, calaminage, conso d'huile. 3008/308/DS, Mini, BMW Série 1.</div></div>
+  <div class="flag"><div class="h">Essence VW 1.4 TSI gen 1 (EA111, avant ~2012)</div><div class="d">Chaîne + conso d'huile. Golf, Polo, Seat, Skoda. (1.8/2.0 TSI gen 1-2 : conso d'huile aussi.)</div></div>
+  <div class="flag"><div class="h">Diesel BMW 2.0d "N47" (118d, 120d, 320d ~2007-2011)</div><div class="d">Chaîne de distribution côté boîte qui casse, moteur mort. Réparation très lourde.</div></div>
+  <div class="flag"><div class="h">Diesel VW 2.0 TDI "PD" pompe-injecteur (~2004-2008)</div><div class="d">Usure d'arbre à cames. Golf V, Passat.</div></div>
+
+  <div class="grp" style="color:var(--amber)">À vérifier (OK si entretien prouvé, sinon on lâche)</div>
+  <div class="flag warn"><div class="h">PSA 1.6 HDi (DV6, 90 / 110 ch)</div><div class="d">Turbo qui se grippe si vidanges négligées. Acceptable avec factures d'entretien strictes.</div></div>
+  <div class="flag warn"><div class="h">Renault 1.5 dCi (K9K)</div><div class="d">Injecteurs, turbo. Très répandu, OK si historique propre.</div></div>
+  <div class="flag warn"><div class="h">Renault 1.3 TCe (récent)</div><div class="d">Dilution d'huile à surveiller. Moins grave que le 1.2 TCe.</div></div>
+
+  <div class="grp" style="color:var(--green)">À chercher (les costauds, vise ceux-là)</div>
+  <div class="flag good"><div class="h">Diesel PSA 2.0 HDi / BlueHDi (DW10, 136 / 150 / 163 ch)</div><div class="d">LA référence robuste. 308, 407, 508, C5, 3008/5008, Partner/Berlingo 2.0. Ton moteur idéal.</div></div>
+  <div class="flag good"><div class="h">Diesel Toyota 2.0 / 2.2 D-4D</div><div class="d">Très solide. Avensis, Auris, RAV4.</div></div>
+  <div class="flag good"><div class="h">Diesel VW 1.9 TDI (105 / 115 ch)</div><div class="d">Légendaire de fiabilité (mais plus ancien). Aussi Honda 2.2 i-CTDi, Mercedes OM646/OM651.</div></div>
+  <div class="flag good"><div class="h">Essence Toyota atmosphérique / hybride (1.6-1.8 Valvematic, 1.8 hybride)</div><div class="d">Excellent. Auris, Avensis, Corolla, Prius. Crit'Air 1.</div></div>
+  <div class="flag good"><div class="h">Essence Mazda Skyactiv-G 2.0 / 2.5 (atmosphérique, sans turbo)</div><div class="d">Très fiable. Mazda 3, Mazda 6, CX-5. Aussi Honda 1.8 i-VTEC.</div></div>
+
+  <div class="reflex">Réflexe : je vois <b>"2.0 HDi", "Toyota", "Mazda Skyactiv"</b> &rarr; je regarde. Je vois <b>"THP", "PureTech", "TCe", "TSI", "1.2 / 1.4 turbo essence"</b> &rarr; je zappe direct.</div>
+</section>
+
+<!-- ============ RED FLAGS ============ -->
+<section id="redflags">
+  <h2>4. Red flags vendeur / annonce</h2>
+  <div class="lead">Ce qui doit faire fuir, même si le reste est beau.</div>
+
+  <div class="flag"><div class="h">Refus de donner l'immatriculation / VIN</div><div class="d">Empêche de faire un Histovec indépendant. Signal fort.</div></div>
+  <div class="flag"><div class="h">Pas de facture de distribution</div><div class="d">"C'est fait, faites-moi confiance" sans papier = à considérer non fait (700 à 900 EUR).</div></div>
+  <div class="flag"><div class="h">CT ancien, absent, ou avec défaillances</div><div class="d">Un pro doit fournir un CT vierge de moins de 6 mois.</div></div>
+  <div class="flag"><div class="h">Refus d'essai routier réel</div><div class="d">Un essai limité au parking cache quelque chose. Exiger route + autoroute.</div></div>
+  <div class="flag"><div class="h">"Vendu en l'état" chez un pro</div><div class="d">Le pro doit la garantie légale 12 mois. Cette formule sert à s'en exonérer illégalement.</div></div>
+  <div class="flag"><div class="h">Reventes multiples entre pros (Histovec)</div><div class="d">Voiture qui a "tourné" en négoce = souvent un défaut qui se refile.</div></div>
+  <div class="flag"><div class="h">Prix trop beau pour être vrai</div><div class="d">Bien en dessous de la cote = il y a une raison. Chercher laquelle.</div></div>
+</section>
+
+<!-- ============ CONTROLE ============ -->
+<section id="controle">
+  <h2>5. À vérifier sur place</h2>
+  <div class="lead">Pour s'assurer que le véhicule est sain et propre à la conduite.</div>
+
+  <div class="grp">Documents (exiger le papier)</div>
+  <div class="card"><ul>
+    <li class="ok">Carte grise cohérente + <b>certificat de non-gage</b></li>
+    <li class="ok">Carnet d'entretien <b>tamponné</b> + factures de révision</li>
+    <li class="ok">Facture de <b>distribution</b> (courroie/chaîne) avec km et date</li>
+    <li class="ok"><b>CT vierge</b> de moins de 6 mois</li>
+    <li class="ok">Immat / VIN pour faire ton <b>Histovec</b></li>
+  </ul></div>
+
+  <div class="grp">Moteur (à froid, avant l'essai)</div>
+  <div class="card"><ul>
+    <li class="ok">Démarrage immédiat, <b>sans fumée</b> à l'échappement</li>
+    <li class="ok">Jauge d'huile : niveau correct, huile pas boueuse</li>
+    <li class="ok">Sous le bouchon d'huile : <b>pas de dépôt blanchâtre</b> (joint de culasse)</li>
+    <li class="ok">Pas de fuite (huile, liquide) sous la voiture</li>
+    <li class="ok">Pas de claquement (chaîne) ni sifflement anormal (turbo)</li>
+  </ul></div>
+
+  <div class="grp">Carrosserie et pneus</div>
+  <div class="card"><ul>
+    <li class="ok">Jeux de portes réguliers, <b>pas de différence de teinte</b> (repeinte = ancien choc)</li>
+    <li class="ok">Pas de rouille (bas de caisse, passages de roue)</li>
+    <li class="ok">Pneus (4) : usure <b>régulière et homogène</b> (sinon parallélisme/train faussé)</li>
+    <li class="ok">Pare-brise sans éclat dans le champ de vision</li>
+  </ul></div>
+
+  <div class="grp">Intérieur</div>
+  <div class="card"><ul>
+    <li class="ok">Usure cohérente avec le km (volant, pédales, sièges)</li>
+    <li class="ok">Clim qui <b>souffle vraiment froid</b></li>
+    <li class="ok">Tous les <b>voyants s'éteignent</b> après le démarrage</li>
+    <li class="ok">Électronique OK : vitres, écran, options annoncées</li>
+  </ul></div>
+
+  <div class="grp">Essai routier (exiger route + un peu d'autoroute)</div>
+  <div class="card"><ul>
+    <li class="ok"><b>Fumée bleue</b> en accélérant = conso d'huile, rédhibitoire</li>
+    <li class="ok">Embrayage : point pas trop haut, pas d'odeur, pas de patinage</li>
+    <li class="ok">Boîte : passe sans craquement, pas de bruit au point mort</li>
+    <li class="ok">Direction droite, volant centré, pas de vibration</li>
+    <li class="ok">Freinage droit, sans vibration ni bruit</li>
+    <li class="ok">Pas de <b>bruit de roulement</b> qui monte avec la vitesse</li>
+    <li class="ok">Aucun voyant qui s'allume pendant l'essai</li>
+  </ul></div>
+
+  <div class="grp">Après l'essai</div>
+  <div class="card"><ul>
+    <li class="ok">Rouvrir le capot : pas de nouvelle fuite, niveau d'huile stable</li>
+    <li class="ok">Négocier le prix selon chaque défaut constaté</li>
+  </ul></div>
+
+  <div class="reflex">Le doute persiste ? <b>Contrôle pré-achat dans un garage tiers</b> (70 à 120 EUR, test compression + conso d'huile). Ça tranche définitivement la question fiabilité.</div>
+</section>
+
+<footer>Fiche personnelle - MAJ 03/08/2026 - Critères : diesel si &gt; 22 000 km/an (sinon essence fiable), ≤ 8 000 EUR, ≤ 150 000 km, 120-150 ch, 0-100 &lt; 11s.</footer>
+
+</body>
+</html>
