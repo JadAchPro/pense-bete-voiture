@@ -20,7 +20,9 @@
     border-bottom:1px solid var(--line);-webkit-overflow-scrolling:touch}
   .nav a{flex:0 0 auto;border:1px solid var(--line);background:#fff;color:var(--accent);border-radius:999px;
     padding:7px 12px;font-size:.82rem;font-weight:600;white-space:nowrap;text-decoration:none}
-  section{padding:16px 14px 4px;scroll-margin-top:56px}
+  section{padding:16px 14px 4px;display:none}
+  section.active{display:block}
+  .nav a.current{background:var(--accent);color:#fff;border-color:var(--accent)}
   h2{font-size:1.12rem;margin-bottom:4px}
   .lead{color:var(--muted);font-size:.86rem;margin-bottom:12px}
   .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:13px 15px;margin-bottom:11px;
@@ -81,6 +83,19 @@
   .ann a.src{display:inline-block;font-size:.82rem;font-weight:700;color:var(--accent);text-decoration:none;
     border:1px solid var(--line);border-radius:8px;padding:5px 10px}
   .ann .ref{font-size:.78rem;color:var(--muted)}
+  .chk{list-style:none}
+  .chk li{display:flex;gap:9px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--line);font-size:.9rem}
+  .chk li:last-child{border-bottom:none}
+  .chk li::before{content:none}
+  .chk input[type=checkbox]{margin-top:2px;width:17px;height:17px;flex:0 0 auto}
+  .chk small.money{color:var(--green);font-weight:600;margin-top:2px}
+  .note-box{background:#eef3ff;border:1px solid #d6e0ff;border-radius:12px;padding:11px 13px;margin-bottom:11px;font-size:.86rem}
+  .note-box b{color:var(--accent)}
+  .tbl-wrap{overflow-x:auto;margin-bottom:11px}
+  table{width:100%;border-collapse:collapse;font-size:.85rem;background:var(--card);border:1px solid var(--line);border-radius:10px}
+  th,td{text-align:left;padding:7px 9px;border-bottom:1px solid var(--line);vertical-align:top}
+  tr:last-child td{border-bottom:none}
+  th{color:var(--muted);font-weight:700;font-size:.74rem;text-transform:uppercase;letter-spacing:.03em}
   footer{text-align:center;color:var(--muted);font-size:.76rem;margin-top:20px;padding:0 14px}
 </style>
 </head>
@@ -97,6 +112,7 @@
   <a href="#moteurs">Moteurs</a>
   <a href="#redflags">Red flags</a>
   <a href="#controle">Contrôles sur place</a>
+  <a href="#verif">Inspection visite</a>
   <a href="#annonces">Annonces vues</a>
   <a href="#liens">Liens à consulter</a>
 </nav>
@@ -290,9 +306,117 @@
   <div class="reflex">Le doute persiste ? <b>Contrôle pré-achat dans un garage tiers</b> (70 à 120 EUR, test compression + conso d'huile). Ça tranche définitivement la question fiabilité.</div>
 </section>
 
+<!-- ============ INSPECTION VISITE ============ -->
+<section id="verif">
+  <h2>6. Inspection &amp; achat (5008 diesel ~130 000 km)</h2>
+  <div class="lead">Pense-bête à garder sous les yeux pendant la visite. De jour, moteur froid, sans se presser.</div>
+  <div class="note-box">💰 Les montants sont des <b>ordres de grandeur</b> (France, main d'œuvre incluse). Base de négo : coût estimé de la réparation → à déduire du prix demandé.</div>
+
+  <div class="grp">Bloc 1 — Les papiers (le plus important)</div>
+  <ul class="chk">
+    <li><input type="checkbox"><span><b>Carte grise au nom du vendeur</b> — autre nom = méfiance, demande pourquoi.</span></li>
+    <li><input type="checkbox"><span><b>Certificat de non-gage</b> daté de <b>moins de 15 jours</b> (ni dette, ni opposition, ni gage).</span></li>
+    <li><input type="checkbox"><span><b>Contrôle technique &lt; 6 mois</b> — lis bien les défauts notés.</span></li>
+    <li><input type="checkbox"><span><b>Carnet d'entretien + factures</b> (vidanges, distribution…).</span></li>
+  </ul>
+  <div class="note-box"><b>Non-gage manquant ?</b> Pas bloquant : gratuit et immédiat, le vendeur le génère en 5 min sur l'ANTS (véhicule immatriculé en France, &lt; 15 jours). 🚩 Refus ou retard = signal d'alerte.</div>
+  <div class="note-box"><b>Rapport Histovec</b> (gratuit, à demander avant de te déplacer). Seul le vendeur peut le générer (RGPD) sur histovec.interieur.gouv.fr. Révèle propriétaires, gage/vol, sinistres, et l'<b>historique des CT avec kilométrages</b> (anti-compteur trafiqué). Généré le jour même. 🚩 Refus = alerte.</div>
+
+  <div class="grp">Bloc 2 — Inspection physique (à la lumière du jour)</div>
+  <ul class="chk">
+    <li><input type="checkbox"><span><b>Écarts de carrosserie réguliers</b> — irréguliers = accident réparé. <small class="money">Retouche 150-400 €/panneau · structurel mal réparé = 🚩 fuir</small></span></li>
+    <li><input type="checkbox"><span><b>Pas de rouille</b> (bas de caisse, coffre sous tapis, passages de roue). <small class="money">Superficielle 100-300 € · châssis = 🚩 fuir</small></span></li>
+    <li><input type="checkbox"><span><b>Usure des pneus régulière</b> (inégale = géométrie faussée). <small class="money">~350-600 € le train · parallélisme 60-100 €</small></span></li>
+    <li><input type="checkbox"><span><b>Freins</b> (disques, plaquettes). <small class="money">Plaquettes 80-200 € · + disques/essieu 250-450 €</small></span></li>
+    <li><input type="checkbox"><span><b>Pas de fuite d'huile</b> sous le moteur. Moteur trop propre/dégraissé = suspect. <small class="money">Joint simple 150-500 € · fuite profonde 400-900 €</small></span></li>
+    <li><input type="checkbox"><span><b>Huile pas "mayonnaise"</b> sous le bouchon (= 🚩 joint de culasse). <small class="money">Culasse 1 500-3 000 € = fuir</small></span></li>
+    <li><input type="checkbox"><span><b>Liquide de refroidissement</b> ni marronâtre ni niveau bizarre. <small class="money">Vidange circuit 80-150 €</small></span></li>
+  </ul>
+
+  <div class="grp">Bloc 3 — Essai routier (indispensable)</div>
+  <ul class="chk">
+    <li><input type="checkbox"><span><b>Démarrage moteur froid</b> (c'est là qu'on entend les vrais bruits).</span></li>
+    <li><input type="checkbox"><span><b>Fumée à l'échappement</b> : 🔵 bleue = brûle l'huile (1 000-3 000 €) · ⚪ blanche épaisse = culasse (🚩 1 500-3 000 €) · ⚫ noire = injecteurs (100-500 €, bénin).</span></li>
+    <li><input type="checkbox"><span><b>Rouler ville + voie rapide.</b></span></li>
+    <li><input type="checkbox"><span><b>Freinage franc</b>, sans vibration, sans tirer d'un côté.</span></li>
+    <li><input type="checkbox"><span><b>Toutes les vitesses passent</b>, sans à-coups.</span></li>
+    <li><input type="checkbox"><span><b>Pas d'à-coups à l'accélération</b> (sinon injection ou FAP).</span></li>
+  </ul>
+
+  <div class="grp">Bloc 4 — Points spécifiques 5008 diesel HDi</div>
+  <ul class="chk">
+    <li><input type="checkbox"><span><b>Distribution faite ? SUR FACTURE</b> — intervalle vers 130k km. <small class="money">Kit complet 700-1 000 € → négo si pas faite</small></span></li>
+    <li><input type="checkbox"><span><b>FAP</b> (s'encrasse en ville — demande l'usage). <small class="money">Nettoyage 150-400 € · remplacement 800-2 000 € = 🚩 gros levier</small></span></li>
+    <li><input type="checkbox"><span><b>Vanne EGR</b> (à-coups / voyants). <small class="money">150-600 €</small></span></li>
+    <li><input type="checkbox"><span><b>Aucun voyant allumé</b> au tableau de bord. <small class="money">Voyant = exige un diagnostic 50-90 € avant achat</small></span></li>
+    <li><input type="checkbox"><span><b>Embrayage ne patine pas</b> (régime qui monte sans accélérer). <small class="money">Kit 700-1 200 €</small></span></li>
+    <li><input type="checkbox"><span><b>Monte bien en température.</b> <small class="money">Thermostat 120-250 €</small></span></li>
+  </ul>
+  <div class="note-box">✅ Bonne nouvelle : ce n'est <b>pas</b> un essence PureTech 1.2 — tu évites le piège de la courroie humide.</div>
+
+  <div class="grp">Récap : red flag ou négociation ?</div>
+  <div class="tbl-wrap"><table>
+    <tr><th>Problème</th><th>Verdict</th></tr>
+    <tr><td>Rouille châssis / structure</td><td>🚩 Fuir</td></tr>
+    <tr><td>VIN trafiqué / incohérent</td><td>🚩 Fuir</td></tr>
+    <tr><td>Fumée blanche épaisse (culasse)</td><td>🚩 Fuir / négocier fort</td></tr>
+    <tr><td>Fumée bleue abondante permanente</td><td>⚠️ Chiffrer</td></tr>
+    <tr><td>Fuite légère, pneus, freins, distribution</td><td>💰 Négocier</td></tr>
+  </table></div>
+  <div class="note-box"><b>Principe :</b> presque tout se chiffre. Estime le coût de réparation → retire-le du prix demandé.</div>
+
+  <div class="grp">Barème indicatif (à déduire du prix)</div>
+  <div class="tbl-wrap"><table>
+    <tr><th>Défaut</th><th>Coût posé</th><th></th></tr>
+    <tr><td>Retouche peinture / élément</td><td>150-400 €</td><td>💰</td></tr>
+    <tr><td>Rouille superficielle</td><td>100-300 €</td><td>💰</td></tr>
+    <tr><td>Rouille châssis</td><td>imprévisible</td><td>🚩</td></tr>
+    <tr><td>Pneus (train complet)</td><td>350-600 €</td><td>💰</td></tr>
+    <tr><td>Parallélisme</td><td>60-100 €</td><td>💰</td></tr>
+    <tr><td>Plaquettes</td><td>80-200 €</td><td>💰</td></tr>
+    <tr><td>Plaquettes + disques (essieu)</td><td>250-450 €</td><td>💰</td></tr>
+    <tr><td>Fuite huile (joint simple)</td><td>150-500 €</td><td>💰</td></tr>
+    <tr><td>Fuite huile profonde / spi</td><td>400-900 €</td><td>💰</td></tr>
+    <tr><td>Joint de culasse</td><td>1 500-3 000 €</td><td>🚩</td></tr>
+    <tr><td>Fumée bleue (segments)</td><td>1 000-3 000 €</td><td>⚠️</td></tr>
+    <tr><td>Fumée noire (injecteurs)</td><td>100-500 €</td><td>💰</td></tr>
+    <tr><td>Distribution (kit complet)</td><td>700-1 000 €</td><td>💰</td></tr>
+    <tr><td>FAP — nettoyage</td><td>150-400 €</td><td>💰</td></tr>
+    <tr><td>FAP — remplacement</td><td>800-2 000 €</td><td>🚩</td></tr>
+    <tr><td>Vanne EGR</td><td>150-600 €</td><td>💰</td></tr>
+    <tr><td>Embrayage (patine)</td><td>700-1 200 €</td><td>💰</td></tr>
+    <tr><td>Thermostat</td><td>120-250 €</td><td>💰</td></tr>
+    <tr><td>Diagnostic (voyant allumé)</td><td>50-90 €</td><td>⚠️</td></tr>
+  </table></div>
+
+  <div class="grp">À réclamer au vendeur</div>
+  <ul class="chk">
+    <li><input type="checkbox"><span>Carte grise, non-gage (&lt; 15 j), CT (&lt; 6 mois)</span></li>
+    <li><input type="checkbox"><span>Carnet + <b>toutes les factures</b> (surtout distribution)</span></li>
+    <li><input type="checkbox"><span>Où la voiture est garée (voir une tache d'huile au sol)</span></li>
+    <li><input type="checkbox"><span>Historique : accidents ? voyant déjà allumé ? usage ville/autoroute ?</span></li>
+    <li><input type="checkbox"><span>Double des clés</span></li>
+  </ul>
+
+  <div class="grp">Bloc 5 — Finaliser l'achat (prix acté)</div>
+  <div class="note-box"><b>Documents remis le jour J :</b></div>
+  <ul class="chk">
+    <li><input type="checkbox"><span><b>Carte grise barrée</b> + mention « Vendu le [date + heure] » + signature.</span></li>
+    <li><input type="checkbox"><span><b>Certificat de cession</b> (Cerfa 15776*02) en 2 exemplaires signés — la date/heure déclenche ton délai de 30 j.</span></li>
+    <li><input type="checkbox"><span><b>Non-gage</b> (&lt; 15 j), <b>CT</b> (&lt; 6 mois), carnet + factures, double des clés.</span></li>
+    <li><input type="checkbox"><span>⚠️ <b>Immat + VIN identiques</b> sur carte grise, CT et cession (anti-arnaque).</span></li>
+  </ul>
+  <div class="note-box"><b>Paiement :</b> chèque de banque (le plus sûr &gt; 3 000 €) ou virement instantané. 🚩 <b>Vérifie le chèque de banque</b> en appelant la banque émettrice via son numéro officiel (pas celui du vendeur) AVANT de remettre clés/argent. ❗ Jamais d'argent avant d'avoir tous les documents.</div>
+  <ul class="chk">
+    <li><input type="checkbox"><span><b>Code de cession à 5 caractères</b> — réclame-le le jour même (indispensable pour ta carte grise).</span></li>
+    <li><input type="checkbox"><span><b>Assurance active dès la prise du volant</b> (appelle avant avec VIN + immat → attestation par mail). Rouler non assuré = jusqu'à 3 750 €.</span></li>
+    <li><input type="checkbox"><span><b>Carte grise à ton nom</b> sur l'ANTS (FranceConnect) avec le code de cession, <b>sous 30 jours</b>. CPI immédiat, carte définitive sous 2-7 j. Coût ~385 € (simulateur ANTS).</span></li>
+  </ul>
+</section>
+
 <!-- ============ ANNONCES VUES ============ -->
 <section id="annonces">
-  <h2>6. Annonces vues</h2>
+  <h2>7. Annonces vues</h2>
   <div class="lead">Annonces retenues à consulter. Distance non bloquante : famille en région parisienne pour visiter et rapatrier. Crit'Air 2 exigé (diesels avant 2011 = exclus).</div>
 
   <div class="ann">
@@ -391,7 +515,7 @@
 
 <!-- ============ LIENS ============ -->
 <section id="liens">
-  <h2>6. Liens intéressants à consulter</h2>
+  <h2>8. Liens intéressants à consulter</h2>
   <div class="lead">Recherches pré-filtrées : Clio Estate &amp; Mégane Estate 1.5 dCi, ≤ 8 000 EUR, 2013+. Régler la localisation sur Gujan-Mestras + 200 km.</div>
 
   <div class="todo"><b>À voir quand je serai chez moi.</b> Sur Leboncoin et La Centrale, ouvrir chaque recherche puis activer l'alerte email ("Sauvegarder la recherche" / "Créer une alerte") pour être notifié en temps réel des nouvelles annonces.</div>
@@ -429,7 +553,30 @@
   <div class="reflex">Le gros du stock est sur <b>Leboncoin et La Centrale</b> (impossibles à scanner automatiquement). Les alertes email natives sont le moyen le plus rapide de trouver cette semaine.</div>
 </section>
 
-<footer>Fiche personnelle - MAJ 03/08/2026 - Critères : diesel si &gt; 22 000 km/an (sinon essence fiable), ≤ 8 000 EUR, ≤ 150 000 km, 120-150 ch, 0-100 &lt; 11s.</footer>
+<footer>Fiche personnelle - MAJ 04/08/2026 - Crit'Air 2 exigé, ≤ 8 000 EUR, ≤ 150 000 km, 120-150 ch. Navigation par pages (menu en haut).</footer>
+
+<script>
+  var pages = document.querySelectorAll('body > section');
+  var links = document.querySelectorAll('.nav a');
+  function show(id){
+    var found = false;
+    pages.forEach(function(p){ var on = (p.id===id); p.classList.toggle('active', on); if(on) found = true; });
+    if(!found && pages[0]){ pages[0].classList.add('active'); id = pages[0].id; }
+    links.forEach(function(a){ a.classList.toggle('current', a.getAttribute('href')==='#'+id); });
+    window.scrollTo(0,0);
+  }
+  function fromHash(){ show(location.hash.replace('#','') || pages[0].id); }
+  links.forEach(function(a){
+    a.addEventListener('click', function(e){
+      e.preventDefault();
+      var id = a.getAttribute('href').slice(1);
+      history.replaceState(null,'','#'+id);
+      show(id);
+    });
+  });
+  window.addEventListener('hashchange', fromHash);
+  fromHash();
+</script>
 
 </body>
 </html>
